@@ -2,8 +2,8 @@
   "profiles": {
     "HotComponent": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Rhino 7\\System\\Rhino.exe",
-      "commandLineArgs": "/nosplash /runscript=\"Grasshopper\""
+      "executablePath": "C:\\Program Files\\Rhino 8\\System\\Rhino.exe",
+      "commandLineArgs": "/nosplash /runscript=\"Grasshopper\" /netfx"
     }
   }
 }

@@ -798,6 +798,30 @@ namespace HotLoader
         }
 
         /// <summary>
+        /// Replaces this component with a new one targeting a different directory.
+        /// </summary>
+        /// <param name="sourceFolderPath">The source folder</param>
+        protected void ReplaceComponentWithPlaceholder(string sourceFolderPath)
+        {
+            HotComponentPlaceholder newComponent = new HotComponentPlaceholder
+            {
+                m_sourcePath = sourceFolderPath
+            };
+
+            GH_Document doc = OnPingDocument();
+
+            newComponent.CreateAttributes();
+            newComponent.Attributes.Pivot = Attributes.Pivot;
+            newComponent.Attributes.ExpireLayout();
+            newComponent.Locked = Locked;
+            doc.RemoveObject(this, false);
+
+            doc.AddObject(newComponent, false);
+            Grasshopper.Instances.ActiveCanvas.Invalidate();
+
+        }
+
+        /// <summary>
         /// Replaces the current component in the document with a new component.
         /// </summary>
         /// <param name="newComponent">The new component</param>
