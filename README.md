@@ -9,10 +9,9 @@ Hotloader extends Grasshopper's scripting tools by allowing you to write, debug,
 
 1. The native Grasshopper script editor is inconvenient to use for tasks with any complexity. The new editor in Rhino 8 is a marked improvement, but still has some of the following limitations.
 2. Distributing scripts that use external references requires users to also have the same references, and locate them. This also includes NuGet packages.
-3. Lifecycle methods are limited (see HotScript) in script components.
-4. Precompiled C# plugins can run faster than script components (as you can use the true parameter types without casting)
-5. Customization if script components is limited (icons, custom drawing, right click menus, etc.).
-6. Writing Grasshopper plugins has some overhead in setting up the project and distributing the plugin.
+3. Precompiled C# plugins can run faster than script components (as you can use the true parameter types without casting)
+4. Customization if script components is limited (icons, custom drawing, right click menus, etc.).
+5. Writing Grasshopper plugins has some overhead in setting up the project and distributing the plugin.
 
 Some of these challenges are assisted in isolation by tools such as [Script Parasite](https://github.com/arendvw/ScriptParasite) or the [new script editor in Rhino 8](https://discourse.mcneel.com/t/rhino-8-feature-scripteditor-cpython-csharp/128353), or even just the [project templates](https://marketplace.visualstudio.com/items?itemName=McNeel.Rhino7Templates2022).
 
