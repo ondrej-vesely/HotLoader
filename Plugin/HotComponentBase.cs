@@ -632,7 +632,15 @@ namespace HotLoader
         /// <param name="csprojPath">The path to the .csproj</param>
         private void UpdateAssemblyReferences(string csprojPath)
         {
-            string assemblyPath = Assembly.GetAssembly(typeof(HotComponentBase)).Location;
+            Assembly assembly = Assembly.GetAssembly(typeof(HotComponentBase));
+            string assemblyPath = assembly.Location;
+
+            if (string.IsNullOrEmpty(assemblyPath))
+            {
+                assemblyPath = Grasshopper.Instances.ComponentServer.Libraries.Where(info => info.Assembly.FullName == assembly.FullName).FirstOrDefault()?.Location;
+            }
+
+            Debug.Assert(assemblyPath != null, "Unable to locate entry assembly.");
 
             string txt = File.ReadAllText(csprojPath);
             string replaced = new Regex(@"(?<=<HintPath>).+HotLoader.gha(?=<\/HintPath>)").Replace(txt, assemblyPath);
