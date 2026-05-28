@@ -632,6 +632,18 @@ namespace HotLoader
         /// <param name="csprojPath">The path to the .csproj</param>
         private void UpdateAssemblyReferences(string csprojPath)
         {
+            string assemblyPath = GetPluginAssemblyPath();
+
+            string txt = File.ReadAllText(csprojPath);
+            string replaced = new Regex(@"(?<=<HintPath>).+HotLoader.gha(?=<\/HintPath>)").Replace(txt, assemblyPath);
+            File.WriteAllText(csprojPath, replaced);
+        }
+
+        /// <summary>
+        /// Locates the main plugin assembly, including a fallback to Grasshopper's library registry.
+        /// </summary>
+        private static string GetPluginAssemblyPath()
+        {
             Assembly assembly = Assembly.GetAssembly(typeof(HotComponentBase));
             string assemblyPath = assembly.Location;
 
@@ -641,10 +653,7 @@ namespace HotLoader
             }
 
             Debug.Assert(assemblyPath != null, "Unable to locate entry assembly.");
-
-            string txt = File.ReadAllText(csprojPath);
-            string replaced = new Regex(@"(?<=<HintPath>).+HotLoader.gha(?=<\/HintPath>)").Replace(txt, assemblyPath);
-            File.WriteAllText(csprojPath, replaced);
+            return assemblyPath;
         }
 
         /// <summary>
