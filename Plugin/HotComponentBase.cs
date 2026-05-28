@@ -366,11 +366,15 @@ namespace HotLoader
         }
 
         /// <summary>
-        /// Path to folder next to the plugin assembly that may contain a custom template.
+        /// Path to folder in Application data where custom default templates are stored.
         /// </summary>
         private static string GetCustomTemplateDir()
         {
-            return Path.Combine(Path.GetDirectoryName(GetPluginAssemblyPath()), "template");
+            return Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
+                "HotLoader", 
+                "DefaultTemplate"
+            );
         }
 
         /// <summary>
